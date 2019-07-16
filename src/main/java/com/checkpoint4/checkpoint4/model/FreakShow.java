@@ -1,15 +1,17 @@
 package com.checkpoint4.checkpoint4.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+@Entity
 public class FreakShow implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -20,17 +22,21 @@ public class FreakShow implements Serializable {
     @NotEmpty
     private String description;
 
-    @NotNull
-    @NotEmpty
-    private String show;
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            mappedBy = "freakshows")
+
+    private Set<User> users = new HashSet<>();
 
     public FreakShow() {
     }
 
-    public FreakShow(@NotNull @NotEmpty String name, @NotNull @NotEmpty String description, @NotNull @NotEmpty String show) {
+    public FreakShow(@NotNull @NotEmpty String name, @NotNull @NotEmpty String description) {
         this.name = name;
         this.description = description;
-        this.show = show;
     }
 
     public Long getId() {
@@ -57,11 +63,11 @@ public class FreakShow implements Serializable {
         this.description = description;
     }
 
-    public String getShow() {
-        return show;
+    public Set<User> getUsers() {
+        return users;
     }
 
-    public void setShow(String show) {
-        this.show = show;
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 }

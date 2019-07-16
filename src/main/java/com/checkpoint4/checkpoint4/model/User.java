@@ -1,17 +1,19 @@
 package com.checkpoint4.checkpoint4.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotEmpty
@@ -22,12 +24,30 @@ public class User implements Serializable {
     @NotNull
     private String password;
 
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(name = "present",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "freakShow_id")})
+    private Set<FreakShow> freakshows = new HashSet<>();
+
     public User() {
     }
 
     public User(@NotEmpty @NotNull String email, @NotEmpty @NotNull String password) {
         this.email = email;
         this.password = password;
+    }
+
+    public Set<FreakShow> getFreakshows() {
+        return freakshows;
+    }
+
+    public void setFreakshows(Set<FreakShow> freakshows) {
+        this.freakshows = freakshows;
     }
 
     public String getEmail() {
