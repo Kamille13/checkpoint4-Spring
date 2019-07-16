@@ -28,7 +28,6 @@ public class FreakShow implements Serializable {
                     CascadeType.MERGE
             },
             mappedBy = "freakshows")
-
     private Set<User> users = new HashSet<>();
 
     public FreakShow() {

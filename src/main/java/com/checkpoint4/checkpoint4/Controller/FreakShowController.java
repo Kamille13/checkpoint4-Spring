@@ -18,10 +18,10 @@ public class FreakShowController {
 
     @PostMapping("/freakshows")
     public FreakShow postFreakShow(@RequestBody FreakShow freakShow){
-        return  freakShowRepository.save(freakShow);
+        return freakShowRepository.save(freakShow);
     }
 
-    @GetMapping("/movies")
+    @GetMapping("/freakshows")
     public List<FreakShow> findAll() {
         return freakShowRepository.findAll();
     }

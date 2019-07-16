@@ -18,6 +18,11 @@ public class UserController {
     @Autowired
     FreakShowRepository freakShowRepository;
 
+    @GetMapping("/users")
+    public List<User> getUser(){
+        return userRepository.findAll();
+    }
+
     @PostMapping("/users")
     public User postUser(@RequestBody User user) {
         return userRepository.save(user);
@@ -28,7 +33,7 @@ public class UserController {
         return userRepository.findUserByEmailIgnoreCase(user.getEmail());
     }
 
-    @PostMapping("/users/{idUser}/freakShow/{idFreakShow}")
+    @PostMapping("/users/{idUser}/freakshows/{idFreakShow}")
     public User addFavorite(@PathVariable Long idUser,
                             @PathVariable Long idFreakShow) {
         User user = userRepository.findById(idUser).get();

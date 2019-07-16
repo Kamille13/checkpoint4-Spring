@@ -31,7 +31,8 @@ public class User implements Serializable {
             })
     @JoinTable(name = "present",
             joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "freakShow_id")})
+            inverseJoinColumns = {@JoinColumn(name = "freak_show_id")})
+    @JsonIgnore
     private Set<FreakShow> freakshows = new HashSet<>();
 
     public User() {
@@ -42,12 +43,12 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public Set<FreakShow> getFreakshows() {
-        return freakshows;
+    public Long getId() {
+        return id;
     }
 
-    public void setFreakshows(Set<FreakShow> freakshows) {
-        this.freakshows = freakshows;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -66,11 +67,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public Long getId() {
-        return id;
+    public Set<FreakShow> getFreakshows() {
+        return freakshows;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setFreakshows(Set<FreakShow> freakshows) {
+        this.freakshows = freakshows;
     }
 }
