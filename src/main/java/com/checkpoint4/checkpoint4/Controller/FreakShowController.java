@@ -3,10 +3,7 @@ package com.checkpoint4.checkpoint4.Controller;
 import com.checkpoint4.checkpoint4.model.FreakShow;
 import com.checkpoint4.checkpoint4.repository.FreakShowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,5 +21,10 @@ public class FreakShowController {
     @GetMapping("/freakshows")
     public List<FreakShow> findAll() {
         return freakShowRepository.findAll();
+    }
+
+    @DeleteMapping("/freakshows/{freakshowId}")
+    public void deleteFreakShow(@PathVariable Long freakshowId){
+        freakShowRepository.deleteById(freakshowId);
     }
 }

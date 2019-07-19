@@ -43,4 +43,5 @@ public class UserController {
         freakShowRepository.save(freakShow);
         return userRepository.save(user);
     }
+
 }
