@@ -24,7 +24,7 @@ public class FreakShowController {
     }
 
     @DeleteMapping("/freakshows/{freakshowId}")
-    public void deleteFreakShow(@PathVariable Long freakshowId){
-        freakShowRepository.deleteById(freakshowId);
+    public void deleteFreakShow(@PathVariable Long freakShowId){
+        freakShowRepository.deleteById(freakShowId);
     }
 }
