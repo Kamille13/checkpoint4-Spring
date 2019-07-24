@@ -22,9 +22,8 @@ public class FreakShowController {
     public List<FreakShow> findAll() {
         return freakShowRepository.findAll();
     }
-
     @DeleteMapping("/freakshows/{freakshowId}")
-    public void deleteFreakShow(@PathVariable Long freakShowId){
-        freakShowRepository.deleteById(freakShowId);
+    public void deleteFreakShow(@PathVariable Long freakshowId){
+        freakShowRepository.deleteById(freakshowId);
     }
 }
